@@ -83,7 +83,7 @@ jobs:
       - name: Output Information
         run: |
           echo "This is report"
-          echo  "${{ github }}""
+          echo '${{ toJson(github) }}'
 
 
 
