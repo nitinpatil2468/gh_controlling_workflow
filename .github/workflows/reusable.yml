@@ -1,8 +1,21 @@
 name: Reusable Workflow
-on: workflow_call
+on:
+  workflow_call:
+    inputs: 
+       artifact-name:
+            description: "files should be deployable"
+            required: true    #if its false then it will execute even without inputs, if true then it want value to execute
+            default: dist-files
+            type: string
+              
 jobs:
    deploy:
        runs-on: ubuntu-latest
        steps:
            - name: Deploy
              run: echo "Deploying and Uploading..."
+           - name: Get Code 
+             uses: actions/download-artifact@v7 
+             with:
+               name:${{ inputs.artifact-name  }}
+            
